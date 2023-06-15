@@ -5,6 +5,8 @@
 #include <iostream>
 #include <string>
 #include "nlohmann/json.hpp"
+#include "types.h"
+
 
 using json = nlohmann::json;
 using namespace std;
@@ -65,6 +67,20 @@ public:
         }
 
         // We are outside the loop now, which means END_INIT signal was received.
+
+        // Let's figure out the size of the map based on the given boundaries.
+        // Set width and height = 0 then find the maximum x and y - they have to be the width and height of the map.
+        width = 0;
+        height = 0;
+        for (auto object_it: objects) {
+            if (object_it.second["type"] == BOUNDARY) {
+                json position = object_it.second["position"];
+                for (int i = 0; i < 4; i++) {
+                    width = max(width, (int)position[i][0]);
+                    height = max(height, (int)position[i][1]);
+                }
+            }
+        }
     }
 
     bool readNextTurnData() {
