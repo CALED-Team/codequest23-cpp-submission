@@ -1,8 +1,14 @@
-#include "Game.h"
+#include "game.h"
+#include <time.h>
+
 
 int main() {
+    srand(time(0));
+
     Game game;
-    game.readAndParseJSON();
+    
+    while (game.readNextTurnData())
+        game.respondToTurn();
 
     return 0;
 }
