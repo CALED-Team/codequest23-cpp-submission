@@ -1,14 +1,33 @@
-# CodeQuest 23 Raw Submission Template
+# CodeQuest 23 C++ Submission Template
 
-Use this repo as a starting point for your submissions to CodeQuest 23.
+Use this repo as starting point for your C++ submissions to CodeQuest 23.
 
+## Running the code
 
-## Changing the Dockerfile
+To compile and test on your local, either compile with gcc:
 
-You may make any changes you would like to the Dockerfile. However, there are a few requirements:
-- Your final image should have a file at `/codequest/run.sh`. This will be your main executable. Whatever this file
-prints will be taken as your bot's output and will be sent to the game server. Do not print logs or run other commands
-in this file. It should only run your bot e.g. `python src.py` or `./src.out` etc. If you need to install dependencies
-make sure you do that somewhere else in your Dockerfile.
-- Your final image needs to be Linux based. It also needs to have Python (>=3.9) and `socat` installed. These are
-already provided in the Dockerfile in this repo so if you don't change them you'll be fine.
+```
+g++ src/main.cpp -o game.out -std=c++11
+```
+
+and run:
+
+```
+./game.out
+```
+
+Or run using the docker image (which would ensure you get the same output as on CodeQuest servers) from the root directory:
+
+```
+docker build . -t my-submission:latest
+docker run -it my-submission:latest
+```
+
+## Working on your bot
+
+All functions in the code are commented so I would recommend checking the comments first.
+
+Most logic of the game is inside the `Game` class. The input is already read and parsed for you. You can, if you need, change the
+input reading logic.
+
+The main part of the code you should change is `Game::respondToTurn`. Use the `objects` attribute to process what's happening in the game and respond with an action.
