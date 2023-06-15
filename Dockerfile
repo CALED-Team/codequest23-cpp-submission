@@ -1,7 +1,7 @@
 FROM python:3.10-alpine
 
 # Socat needs to be installed for communication with the sidecar
-RUN apk add socat
+RUN apk add socat build-base
 
 # This directory needs to exist
 RUN mkdir -p /codequest
