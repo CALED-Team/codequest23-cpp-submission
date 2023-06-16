@@ -16,8 +16,8 @@ public:
     string tankId;  // Your client's tank id
     json currentTurnMessage;  // The last received message (updated in readNextTurnData)
     map<string, json> objects;  // All the objects with the same format as described in the doc. The key will be object id and value will be the object itself.
-    int width;  // The width of the map.
-    int height;  // The height of the map.
+    double width;  // The width of the map.
+    double height;  // The height of the map.
 
     json readAndParseJSON() {
         /*
@@ -76,8 +76,8 @@ public:
             if (object_it.second["type"] == BOUNDARY) {
                 json position = object_it.second["position"];
                 for (int i = 0; i < 4; i++) {
-                    width = max(width, (int)position[i][0]);
-                    height = max(height, (int)position[i][1]);
+                    width = max(width, (double)position[i][0]);
+                    height = max(height, (double)position[i][1]);
                 }
             }
         }
